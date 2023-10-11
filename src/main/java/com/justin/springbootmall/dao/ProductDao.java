@@ -1,6 +1,7 @@
 package com.justin.springbootmall.dao;
 
 import com.justin.springbootmall.constant.ProductCategory;
+import com.justin.springbootmall.dto.ProductQueryParams;
 import com.justin.springbootmall.dto.ProductRequest;
 import com.justin.springbootmall.model.Product;
 
@@ -16,5 +17,5 @@ public interface ProductDao {
 
     void deleteProductById(Integer productId);
 
-    List<Product> getProducts(ProductCategory category, String search);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 }
