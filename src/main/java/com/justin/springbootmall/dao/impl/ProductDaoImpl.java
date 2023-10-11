@@ -32,8 +32,6 @@ public class ProductDaoImpl implements ProductDao {
 
         Map<String, Object> map = new HashMap<>();
 
-
-
         if(productQueryParams.getCategory()!=null){
             sql = sql + " AND category=:category";
             map.put("category",productQueryParams.getCategory().name()); // 注意
@@ -47,10 +45,10 @@ public class ProductDaoImpl implements ProductDao {
         // 查詢條件
 //        sql = addFilteringSql(sql, map, productQueryParams);
 //
-//        // 排序
-//        sql = sql + " ORDER BY " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort();
-//
-//        // 分頁
+        // 排序
+        sql = sql + " ORDER BY " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort();
+
+        // 分頁
 //        sql = sql + " LIMIT :limit OFFSET :offset";
 //        map.put("limit", productQueryParams.getLimit());
 //        map.put("offset", productQueryParams.getOffset());
