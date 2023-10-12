@@ -1,5 +1,6 @@
 package com.justin.springbootmall.dto;
 
+import com.justin.springbootmall.constant.ProductCategory;
 import jakarta.validation.constraints.NotNull;
 
 public class ProductRequest {
@@ -7,7 +8,7 @@ public class ProductRequest {
     @NotNull
     private String productName;
     @NotNull
-    private String category;
+    private ProductCategory category;
     @NotNull
     private String imageUrl;
     @NotNull
@@ -25,11 +26,11 @@ public class ProductRequest {
         this.productName = productName;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 
