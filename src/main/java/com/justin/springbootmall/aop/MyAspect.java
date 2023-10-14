@@ -1,21 +1,27 @@
 package com.justin.springbootmall.aop;
 
-import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Aspect
 @Component
 public class MyAspect {
 
-    @Before("execution(* com.justin.springbootmall.aop.HpPrinter.*(..))")
-    public void before(){
-        System.out.println("-- this is aop before --");
+    @Around("execution(* com.justin.springbootmall.aop.HpPrinter.*(..))")
+    public Object around(ProceedingJoinPoint pjp) throws Throwable{
+        Date startTime = new Date();
+        // 執行切入點的方法
+        Object obj = pjp.proceed();
+
+        Date endTime = new Date();
+        long executionTime = endTime.getTime() - startTime.getTime();
+        System.out.println("this method takes "+executionTime+"ms to execute");
+        return obj;
     }
 
-    @After("execution(* com.justin.springbootmall.aop.HpPrinter.*(..))")
-    public void after(){
-        System.out.println("-- this is aop after --");
-    }
+
 }
