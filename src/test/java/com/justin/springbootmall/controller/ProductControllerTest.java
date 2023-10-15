@@ -32,7 +32,7 @@ public class ProductControllerTest {
     @Test
     public void getProduct_success() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/products/{productId}", 1);
+                .get("/products/{productId}", 5);
 
         mockMvc.perform(requestBuilder)
                 .andDo(print())

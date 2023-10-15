@@ -6,16 +6,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class HpPrinter implements Printer{
 
-    @Value("${printer.name}")
-    private String name;
+
 
     @Override
     public void print(String message) {
-        System.out.println("print "+name);
+        System.out.println("print "+message);
     }
 
     @Override
     public void printColor(String message) {
-        System.out.println("print color "+name);
+        System.out.println("print color "+message);
     }
 }
