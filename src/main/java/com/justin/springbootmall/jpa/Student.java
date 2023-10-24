@@ -6,9 +6,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity(name = "Student")
-@Table(name = "student")
+@Table(name = "student",
+        uniqueConstraints = {@UniqueConstraint(name = "student_email_unique",columnNames = "email")}
+        )
 public class Student {
 
     @Id
@@ -19,7 +22,7 @@ public class Student {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "age", nullable = false)
