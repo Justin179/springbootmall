@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +21,9 @@ class StudentControllerTest {
 
     @Autowired
     StudentRepository studentRepository;
+
+    @Autowired
+    StudentJpaRepository studentJpaRepository;
 
     @BeforeEach
     void beforeEach(){
@@ -73,7 +79,24 @@ class StudentControllerTest {
         assertEquals(10L, studentRepository.count());
     }
 
+    @Test
+    void sorting(){
+        ArrayList<Student> studentList = createStudentList(10);
+        studentRepository.saveAll(studentList);
+        Sort sort = Sort.by(Sort.Direction.ASC, "name");
+        List<Student> students = studentJpaRepository.findAll(sort);
+        students.stream().forEach(student -> System.out.println(student.getName()));
+    }
 
+    @Test
+    void pagingAndSorting(){
+        ArrayList<Student> studentList = createStudentList(20);
+        studentRepository.saveAll(studentList);
+        Sort sort = Sort.by(Sort.Direction.ASC, "name");
+        PageRequest pageRequest = PageRequest.of(0, 5, sort);
+        Page<Student> page = studentJpaRepository.findAll(pageRequest);
+        System.out.println(page);
+    }
 
     private Student createOneStudent(String name) {
         Faker faker = new Faker();

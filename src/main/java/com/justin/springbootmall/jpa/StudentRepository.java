@@ -27,7 +27,7 @@ public interface StudentRepository extends CrudRepository<Student,Long> {
     @Query(value = "SELECT * FROM student WHERE name = :name AND age = :age", nativeQuery = true)
     List<Student> findStudentByNameEqualsAndAgeEquals(@Param("name") String name, @Param("age") Integer age);
 
-    @Transactional
+    @Transactional // 測試程式的話，有改到db 則必須復原
     @Modifying // tell spring no mapping is needed
     @Query("DELETE FROM Student u WHERE u.email = ?1")
     int deleteStudentByEmail(String email);
