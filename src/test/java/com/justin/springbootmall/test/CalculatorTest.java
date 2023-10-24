@@ -19,6 +19,5 @@ class CalculatorTest {
         assertThrows(ArithmeticException.class,()->{
             calculator.divide(1,0);
         });
-
     }
 }
