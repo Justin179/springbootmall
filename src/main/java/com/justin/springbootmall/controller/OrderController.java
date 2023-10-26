@@ -4,7 +4,7 @@ import com.justin.springbootmall.dto.CreateOrderRequest;
 import com.justin.springbootmall.dto.OrderQueryParams;
 import com.justin.springbootmall.model.Order;
 import com.justin.springbootmall.service.OrderService;
-import com.justin.springbootmall.util.Page;
+import com.justin.springbootmall.utils.Page;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

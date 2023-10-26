@@ -1,4 +1,4 @@
-package com.justin.springbootmall.util;
+package com.justin.springbootmall.utils;
 
 import java.util.List;
 

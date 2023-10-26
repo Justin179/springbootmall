@@ -1,6 +1,7 @@
 package com.justin.springbootmall.jpa;
 
 import com.github.javafaker.Faker;
+import com.justin.springbootmall.utils.StudentUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,20 +30,21 @@ class StudentControllerTest {
     @BeforeEach
     void beforeEach(){
         studentRepository.deleteAll();
+        System.out.println();
     }
 
 
     @Test
     void findStudentByEmail(){
-        studentRepository.save(createOneStudent("justin.uob"));
+        studentRepository.save(StudentUtils.createOneStudent("justin.uob"));
         Student student = studentRepository.findStudentByEmail("justin.uob@gmail.com").orElse(null);
         assertNotNull(student);
     }
 
     @Test
     void findStudentByNameEqualsAndAgeEquals(){
-        Student student1 = createOneStudent("justin", 41, "abcd@gmail.com");
-        Student student2 = createOneStudent("justin", 41, "1234@gmail.com");
+        Student student1 = StudentUtils.createOneStudent("justin", 41, "abcd@gmail.com");
+        Student student2 = StudentUtils.createOneStudent("justin", 41, "1234@gmail.com");
         List<Student> students = Arrays.asList(student1, student2);
         studentRepository.saveAll(students);
         List<Student> studentList = studentRepository.findStudentByNameEqualsAndAgeEquals("justin", 41);
@@ -53,8 +56,8 @@ class StudentControllerTest {
      */
     @Test
     void deleteStudentByEmail(){
-        Student student1 = createOneStudent("justin", 41, "abcd@gmail.com");
-        Student student2 = createOneStudent("justin", 41, "1234@gmail.com");
+        Student student1 = StudentUtils.createOneStudent("justin", 41, "abcd@gmail.com");
+        Student student2 = StudentUtils.createOneStudent("justin", 41, "1234@gmail.com");
         List<Student> students = Arrays.asList(student1, student2);
         studentRepository.saveAll(students);
         studentRepository.deleteStudentByEmail("1234@gmail.com");
@@ -74,14 +77,14 @@ class StudentControllerTest {
 
     @Test
     void saveAll(){
-        ArrayList<Student> students = createStudentList(10);
+        ArrayList<Student> students = StudentUtils.createStudentList(10);
         studentRepository.saveAll(students);
         assertEquals(10L, studentRepository.count());
     }
 
     @Test
     void sorting(){
-        ArrayList<Student> studentList = createStudentList(10);
+        ArrayList<Student> studentList = StudentUtils.createStudentList(10);
         studentRepository.saveAll(studentList);
         Sort sort = Sort.by(Sort.Direction.ASC, "name");
         List<Student> students = studentJpaRepository.findAll(sort);
@@ -90,7 +93,7 @@ class StudentControllerTest {
 
     @Test
     void pagingAndSorting(){
-        ArrayList<Student> studentList = createStudentList(20);
+        ArrayList<Student> studentList = StudentUtils.createStudentList(20);
         studentRepository.saveAll(studentList);
         Sort sort = Sort.by(Sort.Direction.ASC, "name");
         PageRequest pageRequest = PageRequest.of(0, 5, sort);
@@ -98,47 +101,6 @@ class StudentControllerTest {
         System.out.println(page);
     }
 
-    private Student createOneStudent(String name) {
-        Faker faker = new Faker();
-        String email = String.format("%s@gmail.com", name);
-        Integer age = faker.number().numberBetween(18, 40);
-        Student student = new Student(name, email, age);
-        return student;
-    }
-
-    private Student createOneStudent(String name, Integer age) {
-        Faker faker = new Faker();
-        String email = String.format("%s@gmail.com", name);
-        Student student = new Student(name, email, age);
-        return student;
-    }
-
-    private Student createOneStudent(String name, Integer age, String email) {
-        Student student = new Student(name, email, age);
-        return student;
-    }
-
-    private Student createOneStudent() {
-        Faker faker = new Faker();
-        String name = faker.name().name();
-        String email = String.format("%s@gmail.com", name);
-        Integer age = faker.number().numberBetween(18, 40);
-        Student student = new Student(name, email, age);
-        return student;
-    }
-
-    private ArrayList<Student> createStudentList(int quantity) {
-        ArrayList<Student> students = new ArrayList<>();
-        Faker faker = new Faker();
-        for (int i = 0; i < quantity; i++) {
-            String name = faker.name().name();
-            String email = String.format("%s@gmail.com", name);
-            Integer age = faker.number().numberBetween(18,40);
-            Student student = new Student(name, email, age);
-            students.add(student);
-        }
-        return students;
-    }
 
 }
 

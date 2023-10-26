@@ -5,7 +5,7 @@ import com.justin.springbootmall.dto.ProductQueryParams;
 import com.justin.springbootmall.dto.ProductRequest;
 import com.justin.springbootmall.model.Product;
 import com.justin.springbootmall.service.ProductService;
-import com.justin.springbootmall.util.Page;
+import com.justin.springbootmall.utils.Page;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.HttpRetryException;
 import java.util.List;
 
 @Validated
