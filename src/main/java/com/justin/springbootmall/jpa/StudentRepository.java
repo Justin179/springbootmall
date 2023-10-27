@@ -1,5 +1,6 @@
 package com.justin.springbootmall.jpa;
 
+import com.justin.springbootmall.jpa.relationship.entity.Student;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

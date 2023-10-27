@@ -1,6 +1,8 @@
 package com.justin.springbootmall;
 
-import com.justin.springbootmall.jpa.StudentRepository;
+import com.justin.springbootmall.jpa.relationship.entity.Student;
+import com.justin.springbootmall.jpa.relationship.dao.StudentDAO;
+import com.justin.springbootmall.utils.StudentUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,11 +17,14 @@ public class SpringbootmallApplication {
 
 
     @Bean
-    CommandLineRunner commandLineRunner(StudentRepository studentRepository){
+    CommandLineRunner commandLineRunner(StudentDAO studentDAO){
         return runner -> {
             // will be executed right after the service started
 //            Student student = studentRepository.findById(1L).orElse(null);
-            System.out.println("this is commandLineRunner");
+            Student student = StudentUtils.createOneStudent();
+            studentDAO.save(student);
+
+            System.out.println("student just been saved: " + student);
         };
     }
 

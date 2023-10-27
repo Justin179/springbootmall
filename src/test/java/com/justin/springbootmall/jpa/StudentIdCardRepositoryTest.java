@@ -1,15 +1,11 @@
 package com.justin.springbootmall.jpa;
 
-import com.justin.springbootmall.utils.ExampleUtilities;
+import com.justin.springbootmall.jpa.relationship.entity.Student;
 import com.justin.springbootmall.utils.StudentUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class StudentIdCardRepositoryTest {

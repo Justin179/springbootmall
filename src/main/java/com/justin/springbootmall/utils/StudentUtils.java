@@ -1,7 +1,7 @@
 package com.justin.springbootmall.utils;
 
 import com.github.javafaker.Faker;
-import com.justin.springbootmall.jpa.Student;
+import com.justin.springbootmall.jpa.relationship.entity.Student;
 
 import java.util.ArrayList;
 

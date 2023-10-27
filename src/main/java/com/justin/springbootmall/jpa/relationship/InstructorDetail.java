@@ -1,4 +1,4 @@
-package com.justin.springbootmall.jpa.onetoone;
+package com.justin.springbootmall.jpa.relationship;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

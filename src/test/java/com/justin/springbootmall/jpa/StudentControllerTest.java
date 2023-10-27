@@ -1,6 +1,6 @@
 package com.justin.springbootmall.jpa;
 
-import com.github.javafaker.Faker;
+import com.justin.springbootmall.jpa.relationship.entity.Student;
 import com.justin.springbootmall.utils.StudentUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,9 +12,7 @@ import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
