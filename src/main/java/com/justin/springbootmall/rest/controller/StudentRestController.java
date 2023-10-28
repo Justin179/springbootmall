@@ -30,6 +30,16 @@ public class StudentRestController {
         return new ResponseEntity<>(errorResponse,HttpStatus.NOT_FOUND);
     }
 
+    // handle generic exceptions
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(Exception exception){
+        StudentErrorResponse errorResponse = new StudentErrorResponse();
+        errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+        errorResponse.setMessage(exception.getMessage());
+        errorResponse.setTimeStamp(System.currentTimeMillis());
+        return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
+    }
+
     List<PlainStudent> plainStudents;
     // define @PostConstruct to load the student data only once when the given bean is constructed
     @PostConstruct
