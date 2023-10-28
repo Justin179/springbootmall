@@ -30,10 +30,44 @@ public class SpringbootmallApplication {
 //            readStudent(studentDAO); // query one
 
             // query many
-            queryForStudents(studentDAO);
+//            queryForStudents(studentDAO);
 
+            // query by name
+//            queryForStudentsByName(studentDAO, "Omer Moore");
+
+//            updateStudent(studentDAO);
+
+//            deleteStudent(studentDAO);
+
+//            deleteAllStudent(studentDAO);
         };
     }
+
+    private void deleteAllStudent(StudentDAO studentDAO) {
+        int numRowsDeleted = studentDAO.deleteAll();
+        System.out.println("numRowsDeleted: " + numRowsDeleted);
+    }
+
+    private void deleteStudent(StudentDAO studentDAO) {
+        Long studentId = 7L;
+        studentDAO.delete(studentId);
+        System.out.println("deleted student id: "+studentId);
+    }
+
+    private void updateStudent(StudentDAO studentDAO) {
+        Student student7 = studentDAO.findById(7L);
+        System.out.println("student7: "+student7);
+        student7.setName("Kaede Rukawa");
+        studentDAO.update(student7);
+        Student updatedStudent7 = studentDAO.findById(7L);
+        System.out.println("updatedStudent7: "+updatedStudent7);
+    }
+
+    private void queryForStudentsByName(StudentDAO studentDAO, String name) {
+        List<Student> byName = studentDAO.findByName(name);
+        System.out.println(byName);
+    }
+
 
     private void queryForStudents(StudentDAO studentDAO) {
         List<Student> students = studentDAO.findAll();
@@ -59,9 +93,6 @@ public class SpringbootmallApplication {
         for (int i = 0; i < students.size(); i++) {
             studentDAO.save(students.get(i));
         }
-
-
-
     }
 
     private void createStudent(StudentDAO studentDAO) {
