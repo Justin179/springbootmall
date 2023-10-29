@@ -21,14 +21,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class StudentRestController {
 
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException studentNotFoundException){
-        StudentErrorResponse errorResponse = new StudentErrorResponse();
-        errorResponse.setStatus(HttpStatus.NOT_FOUND.value());
-        errorResponse.setMessage(studentNotFoundException.getMessage());
-        errorResponse.setTimeStamp(System.currentTimeMillis());
-        return new ResponseEntity<>(errorResponse,HttpStatus.NOT_FOUND);
-    }
+
 
     // handle generic exceptions
     @ExceptionHandler
