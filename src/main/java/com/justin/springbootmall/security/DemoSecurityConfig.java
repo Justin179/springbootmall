@@ -19,6 +19,7 @@ public class DemoSecurityConfig {
     public UserDetailsManager userDetailsManager(DataSource dataSource){
         return new JdbcUserDetailsManager(dataSource);
     }
+    // pwd: fun123
 
 //    @Bean
 //    public InMemoryUserDetailsManager userDetailsManager(){
