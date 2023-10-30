@@ -20,7 +20,6 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    @Transactional
     public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
@@ -31,13 +30,11 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    @Transactional
     public Employee save(Employee employee) {
         return employeeRepository.save(employee);
     }
 
     @Override
-    @Transactional
     public void deleteById(Long id) {
         employeeRepository.deleteById(id);
     }
