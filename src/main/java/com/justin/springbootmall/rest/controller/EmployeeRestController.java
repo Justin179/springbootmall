@@ -4,9 +4,11 @@ import com.justin.springbootmall.rest.dao.EmployeeDAO;
 import com.justin.springbootmall.rest.entity.Employee;
 import com.justin.springbootmall.rest.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,4 +52,36 @@ public class EmployeeRestController {
         return dbEmployee;
     }
 
+    @PutMapping("/employees")
+    public Employee updateEmployee(@RequestBody Employee employee){
+        Employee dbEmployee = employeeService.save(employee);
+        return dbEmployee;
+    }
+
+    @DeleteMapping("/employees/{employeeId}")
+    public String deleteEmployee(@PathVariable Long employeeId){
+        employeeService.deleteById(employeeId);
+        return "employee id deleted - "+employeeId;
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
