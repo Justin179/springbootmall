@@ -51,8 +51,15 @@ public class SpringbootmallApplication {
 
 //            deleteInstructor(appDAO);
 
-            findInstructorDetail(appDAO);
+//            findInstructorDetail(appDAO);
+
+            deleteInstructorDetail(appDAO);
         };
+    }
+
+    private void deleteInstructorDetail(AppDAO appDAO) {
+        int id = 2;
+        appDAO.deleteInstructorDetailById(id);
     }
 
     private void findInstructorDetail(AppDAO appDAO) {
