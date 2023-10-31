@@ -1,6 +1,7 @@
 package com.justin.springbootmall.jpa.relationship.dao;
 
 import com.justin.springbootmall.jpa.relationship.Instructor;
+import com.justin.springbootmall.jpa.relationship.InstructorDetail;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,5 +34,11 @@ public class AppDAOImpl implements AppDAO{
     public void deleteInstructorById(int id) {
         Instructor instructor = entityManager.find(Instructor.class, id);
         entityManager.remove(instructor);
+    }
+
+    @Override
+    public InstructorDetail findInstructorDetailById(int id) {
+        InstructorDetail instructorDetail = entityManager.find(InstructorDetail.class, id);
+        return instructorDetail;
     }
 }
