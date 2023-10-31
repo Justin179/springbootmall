@@ -19,7 +19,8 @@ public class DemoSecurityConfig {
     public UserDetailsManager userDetailsManager(DataSource dataSource){
         return new JdbcUserDetailsManager(dataSource);
     }
-    // pwd: fun123
+    // https://www.luv2code.com/generate-bcrypt-password
+    // pwd: ooxx
 
 //    @Bean
 //    public InMemoryUserDetailsManager userDetailsManager(){

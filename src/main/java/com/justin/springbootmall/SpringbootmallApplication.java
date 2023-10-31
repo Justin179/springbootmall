@@ -1,5 +1,8 @@
 package com.justin.springbootmall;
 
+import com.justin.springbootmall.jpa.relationship.Instructor;
+import com.justin.springbootmall.jpa.relationship.InstructorDetail;
+import com.justin.springbootmall.jpa.relationship.dao.AppDAO;
 import com.justin.springbootmall.jpa.relationship.entity.Student;
 import com.justin.springbootmall.jpa.relationship.dao.StudentDAO;
 import com.justin.springbootmall.utils.StudentUtils;
@@ -20,7 +23,7 @@ public class SpringbootmallApplication {
 
 
     @Bean
-    CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+    CommandLineRunner commandLineRunner(AppDAO appDAO){
         return runner -> { // will be executed right after the service started
 
 //            createStudent(studentDAO);
@@ -40,7 +43,18 @@ public class SpringbootmallApplication {
 //            deleteStudent(studentDAO);
 
 //            deleteAllStudent(studentDAO);
+
+            createInstructor(appDAO);
+
         };
+    }
+
+    private void createInstructor(AppDAO appDAO) {
+        Instructor instructor = new Instructor("Chad", "Darby", "darby@luv2code.com");
+        InstructorDetail instructorDetail = new InstructorDetail("http://www.luv2code.com/youtube", "Luv 2 code!!!");
+        instructor.setInstructorDetail(instructorDetail);
+
+        appDAO.save(instructor);
     }
 
     private void deleteAllStudent(StudentDAO studentDAO) {
