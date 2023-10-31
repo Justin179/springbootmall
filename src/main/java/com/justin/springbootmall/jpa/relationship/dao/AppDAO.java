@@ -4,4 +4,6 @@ import com.justin.springbootmall.jpa.relationship.Instructor;
 
 public interface AppDAO {
     void save(Instructor instructor);
+
+    Instructor findInstructorById(int id);
 }
