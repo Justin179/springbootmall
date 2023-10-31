@@ -24,7 +24,9 @@ public class InstructorDetail {
     private String hobby;
 
     // 指回(變雙向) refers to "instructorDetail" property in the Instructor class
-    @OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "instructorDetail",
+            cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+            // 這個的看法是All except remove, 也就是說，在刪除instructorDetail時，不要去刪instructor
     private Instructor instructor;
 
 
