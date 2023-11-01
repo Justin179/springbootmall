@@ -64,8 +64,15 @@ public class SpringbootmallApplication {
 
 //            updateInstructor(appDAO);
 
-            updateCourse(appDAO);
+//            updateCourse(appDAO);
+
+            deleteCourseById(appDAO);
         };
+    }
+
+    private void deleteCourseById(AppDAO appDAO) {
+        int id = 10;
+        appDAO.deleteCourseById(id);
     }
 
     private void updateCourse(AppDAO appDAO) {
@@ -130,7 +137,7 @@ public class SpringbootmallApplication {
     }
 
     private void deleteInstructor(AppDAO appDAO) {
-        int id = 1;
+        int id = 4;
         appDAO.deleteInstructorById(id);
     }
 
