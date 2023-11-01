@@ -1,5 +1,6 @@
-package com.justin.springbootmall.jpa.relationship;
+package com.justin.springbootmall.jpa.relationship.entity;
 
+import com.justin.springbootmall.jpa.relationship.entity.Instructor;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

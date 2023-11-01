@@ -1,7 +1,8 @@
 package com.justin.springbootmall;
 
-import com.justin.springbootmall.jpa.relationship.Instructor;
-import com.justin.springbootmall.jpa.relationship.InstructorDetail;
+import com.justin.springbootmall.jpa.relationship.entity.Course;
+import com.justin.springbootmall.jpa.relationship.entity.Instructor;
+import com.justin.springbootmall.jpa.relationship.entity.InstructorDetail;
 import com.justin.springbootmall.jpa.relationship.dao.AppDAO;
 import com.justin.springbootmall.jpa.relationship.entity.Student;
 import com.justin.springbootmall.jpa.relationship.dao.StudentDAO;
@@ -53,8 +54,39 @@ public class SpringbootmallApplication {
 
 //            findInstructorDetail(appDAO);
 
-            deleteInstructorDetail(appDAO);
+//            deleteInstructorDetail(appDAO);
+
+//            createInstructorWithCourses(appDAO);
+
+            findInstructorWithCourses(appDAO);
+
         };
+    }
+
+    private void findInstructorWithCourses(AppDAO appDAO) {
+        int id = 4;
+        Instructor instructor = appDAO.findInstructorById(id);
+        List<Course> courses = appDAO.findCoursesByInstructorId(id);
+        instructor.setCourses(courses);
+
+        System.out.println(instructor);
+        System.out.println(instructor.getCourses());
+    }
+
+    private void createInstructorWithCourses(AppDAO appDAO) {
+
+        Instructor instructor = new Instructor("Susan", "Public", "susan.public@luv2code.com");
+        InstructorDetail instructorDetail = new InstructorDetail("http://www.youtube.com", "Video Games");
+        instructor.setInstructorDetail(instructorDetail);
+
+        // add courses to the instructor
+        Course course = new Course("Air Guitar - The Ultimate Guide");
+        Course course2 = new Course("The Pinball Masterclass");
+        instructor.add(course);
+        instructor.add(course2);
+
+        // save the instructor and its courses and its detail
+        appDAO.save(instructor);
     }
 
     private void deleteInstructorDetail(AppDAO appDAO) {

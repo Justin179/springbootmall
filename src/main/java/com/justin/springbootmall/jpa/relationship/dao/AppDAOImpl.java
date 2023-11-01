@@ -1,12 +1,15 @@
 package com.justin.springbootmall.jpa.relationship.dao;
 
-import com.justin.springbootmall.jpa.relationship.Instructor;
-import com.justin.springbootmall.jpa.relationship.InstructorDetail;
+import com.justin.springbootmall.jpa.relationship.entity.Course;
+import com.justin.springbootmall.jpa.relationship.entity.Instructor;
+import com.justin.springbootmall.jpa.relationship.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.thymeleaf.engine.ElementModelStructureHandler;
+
+import java.util.List;
 
 @Repository
 public class AppDAOImpl implements AppDAO{
@@ -51,5 +54,12 @@ public class AppDAOImpl implements AppDAO{
         instructorDetail.getInstructor().setInstructorDetail(null);
 
         entityManager.remove(instructorDetail);
+    }
+
+    @Override
+    public List<Course> findCoursesByInstructorId(int id) {
+        TypedQuery<Course> query = entityManager.createQuery("from Course where instructor.id=:id",Course.class);
+        query.setParameter("id",id);
+        return query.getResultList();
     }
 }
