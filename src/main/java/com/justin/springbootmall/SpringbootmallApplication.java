@@ -58,9 +58,18 @@ public class SpringbootmallApplication {
 
 //            createInstructorWithCourses(appDAO);
 
-            findInstructorWithCourses(appDAO);
+//            findInstructorWithCourses(appDAO);
 
+            findInstructorWithCoursesByJoinFetch(appDAO);
         };
+    }
+
+    private void findInstructorWithCoursesByJoinFetch(AppDAO appDAO) {
+        int id = 4;
+        Instructor instructor = appDAO.findInstructorByIdJoinFetch(id);
+
+        System.out.println(instructor);
+        System.out.println(instructor.getCourses());
     }
 
     private void findInstructorWithCourses(AppDAO appDAO) {
