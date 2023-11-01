@@ -60,8 +60,26 @@ public class SpringbootmallApplication {
 
 //            findInstructorWithCourses(appDAO);
 
-            findInstructorWithCoursesByJoinFetch(appDAO);
+//            findInstructorWithCoursesByJoinFetch(appDAO);
+
+//            updateInstructor(appDAO);
+
+            updateCourse(appDAO);
         };
+    }
+
+    private void updateCourse(AppDAO appDAO) {
+        int courseId = 10;
+        Course course = appDAO.findCourseById(courseId);
+        course.setTitle("RE4");
+        appDAO.update(course);
+    }
+
+    private void updateInstructor(AppDAO appDAO) {
+        int id = 4;
+        Instructor instructor = appDAO.findInstructorById(id);
+        instructor.setLastName("RE2");
+        appDAO.update(instructor);
     }
 
     private void findInstructorWithCoursesByJoinFetch(AppDAO appDAO) {
