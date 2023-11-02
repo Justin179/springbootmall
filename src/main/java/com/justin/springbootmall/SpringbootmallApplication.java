@@ -4,6 +4,7 @@ import com.justin.springbootmall.jpa.relationship.entity.Course;
 import com.justin.springbootmall.jpa.relationship.entity.Instructor;
 import com.justin.springbootmall.jpa.relationship.entity.InstructorDetail;
 import com.justin.springbootmall.jpa.relationship.dao.AppDAO;
+import com.justin.springbootmall.jpa.relationship.entity.Review;
 import com.justin.springbootmall.jpa.relationship.entity.Student;
 import com.justin.springbootmall.jpa.relationship.dao.StudentDAO;
 import com.justin.springbootmall.utils.StudentUtils;
@@ -66,8 +67,18 @@ public class SpringbootmallApplication {
 
 //            updateCourse(appDAO);
 
-            deleteCourseById(appDAO);
+//            deleteCourseById(appDAO);
+
+            createCourseAndReviews(appDAO);
         };
+    }
+
+    private void createCourseAndReviews(AppDAO appDAO) {
+        Course course = new Course("how to aim & shoot");
+        course.addReview(new Review("well written"));
+        course.addReview(new Review("best guide ever"));
+        course.addReview(new Review("excellent"));
+        appDAO.save(course);
     }
 
     private void deleteCourseById(AppDAO appDAO) {
