@@ -31,4 +31,5 @@ public interface AppDAO {
 
     void save(Course course);
 
+    Course findCourseAndReviewsByCourseId(int id);
 }

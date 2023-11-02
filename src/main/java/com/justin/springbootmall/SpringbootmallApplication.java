@@ -69,8 +69,25 @@ public class SpringbootmallApplication {
 
 //            deleteCourseById(appDAO);
 
-            createCourseAndReviews(appDAO);
+//            createCourseAndReviews(appDAO);
+
+//            retrieveCourseAndReviews(appDAO);
+
+            deleteCourseAndReviews(appDAO);
         };
+    }
+
+    private void deleteCourseAndReviews(AppDAO appDAO) {
+        int courseId = 12;
+
+        appDAO.deleteCourseById(courseId);
+    }
+
+    private void retrieveCourseAndReviews(AppDAO appDAO) {
+        int id = 12;
+        Course course = appDAO.findCourseAndReviewsByCourseId(id);
+        System.out.println(course);
+        System.out.println(course.getReviews());
     }
 
     private void createCourseAndReviews(AppDAO appDAO) {
