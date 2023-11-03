@@ -7,7 +7,7 @@ import java.util.List;
 public interface StudentDAO {
     void save(Student student);
 
-    Student findById(Long id);
+    Student findById(int id);
 
     List<Student> findAll();
 
@@ -15,7 +15,7 @@ public interface StudentDAO {
 
     void update(Student student);
 
-    void delete(Long id);
+    void delete(int id);
 
     int deleteAll();
 }

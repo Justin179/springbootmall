@@ -73,8 +73,20 @@ public class SpringbootmallApplication {
 
 //            retrieveCourseAndReviews(appDAO);
 
-            deleteCourseAndReviews(appDAO);
+//            deleteCourseAndReviews(appDAO);
+
+            createCourseAndStudents(appDAO);
+
         };
+    }
+
+    private void createCourseAndStudents(AppDAO appDAO) {
+        Course course = new Course("how to properly aim");
+        Student student = new Student("john", "doe", 33);
+        Student student2 = new Student("Mary", "public", 44);
+        course.addStudent(student);
+        course.addStudent(student2);
+        appDAO.save(course);
     }
 
     private void deleteCourseAndReviews(AppDAO appDAO) {
@@ -194,17 +206,17 @@ public class SpringbootmallApplication {
     }
 
     private void deleteStudent(StudentDAO studentDAO) {
-        Long studentId = 7L;
+        int studentId = 7;
         studentDAO.delete(studentId);
         System.out.println("deleted student id: "+studentId);
     }
 
     private void updateStudent(StudentDAO studentDAO) {
-        Student student7 = studentDAO.findById(7L);
+        Student student7 = studentDAO.findById(7);
         System.out.println("student7: "+student7);
         student7.setName("Kaede Rukawa");
         studentDAO.update(student7);
-        Student updatedStudent7 = studentDAO.findById(7L);
+        Student updatedStudent7 = studentDAO.findById(7);
         System.out.println("updatedStudent7: "+updatedStudent7);
     }
 

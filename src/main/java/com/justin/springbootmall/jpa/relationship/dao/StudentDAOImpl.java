@@ -29,7 +29,7 @@ public class StudentDAOImpl implements StudentDAO{
     }
 
     @Override
-    public Student findById(Long id) {
+    public Student findById(int id) {
         return entityManager.find(Student.class,id);
     }
 
@@ -57,7 +57,7 @@ public class StudentDAOImpl implements StudentDAO{
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(int id) {
         Student student = entityManager.find(Student.class, id);
         entityManager.remove(student);
     }
