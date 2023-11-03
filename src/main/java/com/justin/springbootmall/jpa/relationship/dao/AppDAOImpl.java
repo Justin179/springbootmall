@@ -3,6 +3,7 @@ package com.justin.springbootmall.jpa.relationship.dao;
 import com.justin.springbootmall.jpa.relationship.entity.Course;
 import com.justin.springbootmall.jpa.relationship.entity.Instructor;
 import com.justin.springbootmall.jpa.relationship.entity.InstructorDetail;
+import com.justin.springbootmall.jpa.relationship.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,10 +116,41 @@ public class AppDAOImpl implements AppDAO{
     }
 
     @Override
+    @Transactional
+    public void save(Student student) {
+        entityManager.persist(student);
+    }
+
+    @Override
+    public Student findStudentAndCoursesByStudentId(int id) {
+        TypedQuery<Student> query = entityManager.createQuery("select s from Student s " +
+                "JOIN FETCH s.courses " +
+                "where s.id = :id", Student.class);
+        query.setParameter("id",id);
+
+        Student student = query.getSingleResult();
+
+        return student;
+    }
+
+    @Override
     public Course findCourseAndReviewsByCourseId(int id) {
 
         TypedQuery<Course> query = entityManager.createQuery("select c from Course c " +
                 "JOIN FETCH c.reviews " +
+                "where c.id = :id", Course.class);
+        query.setParameter("id",id);
+
+        Course course = query.getSingleResult();
+
+        return course;
+    }
+
+    @Override
+    public Course findCourseAndStudentsByCourseId(int id) {
+
+        TypedQuery<Course> query = entityManager.createQuery("select c from Course c " +
+                "JOIN FETCH c.students " +
                 "where c.id = :id", Course.class);
         query.setParameter("id",id);
 

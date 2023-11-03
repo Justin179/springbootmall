@@ -3,6 +3,8 @@ package com.justin.springbootmall.jpa.relationship.dao;
 import com.justin.springbootmall.jpa.relationship.entity.Course;
 import com.justin.springbootmall.jpa.relationship.entity.Instructor;
 import com.justin.springbootmall.jpa.relationship.entity.InstructorDetail;
+import com.justin.springbootmall.jpa.relationship.entity.Student;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,7 +31,16 @@ public interface AppDAO {
 
     Course findCourseById(int id);
 
-    void save(Course course);
+
 
     Course findCourseAndReviewsByCourseId(int id);
+
+    // from a course to students
+    void save(Course course);
+    Course findCourseAndStudentsByCourseId(int id);
+
+    // from a student to courses
+    void save(Student course);
+
+    Student findStudentAndCoursesByStudentId(int id);
 }
