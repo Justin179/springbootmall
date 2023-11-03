@@ -29,9 +29,10 @@ public interface AppDAO {
 
     void update(Course course);
 
+    @Transactional
+    void update(Student student);
+
     Course findCourseById(int id);
-
-
 
     Course findCourseAndReviewsByCourseId(int id);
 
@@ -43,4 +44,6 @@ public interface AppDAO {
     void save(Student course);
 
     Student findStudentAndCoursesByStudentId(int id);
+
+
 }

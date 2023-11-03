@@ -83,8 +83,22 @@ public class SpringbootmallApplication {
 
 //            createStudentAndCourses(appDAO);
 
-            retrieveStudentAndCourses(appDAO);
+//            retrieveStudentAndCourses(appDAO);
+
+            addMoreCoursesForStudent(appDAO);
         };
+    }
+
+    private void addMoreCoursesForStudent(AppDAO appDAO) {
+        int studentId = 3;
+        Student student = appDAO.findStudentAndCoursesByStudentId(studentId);
+        student.addCourse(new Course("Rubik's cube - how to speed cube"));
+        student.addCourse(new Course("Atari 2600 - Game Development"));
+
+        appDAO.update(student);
+
+        System.out.println(student);
+        System.out.println(student.getCourses());
     }
 
     private void retrieveStudentAndCourses(AppDAO appDAO) {

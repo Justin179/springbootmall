@@ -22,11 +22,7 @@ public class AppDAOImpl implements AppDAO{
         this.entityManager = entityManager;
     }
 
-    @Override
-    @Transactional
-    public void save(Instructor instructor) {
-        entityManager.persist(instructor);
-    }
+
 
     @Override
     public Instructor findInstructorById(int id) {
@@ -94,11 +90,15 @@ public class AppDAOImpl implements AppDAO{
     public void update(Instructor instructor) {
         entityManager.merge(instructor);
     }
-
     @Override
     @Transactional
     public void update(Course course) {
         entityManager.merge(course);
+    }
+    @Override
+    @Transactional
+    public void update(Student student) {
+        entityManager.merge(student);
     }
 
     @Override
@@ -109,17 +109,23 @@ public class AppDAOImpl implements AppDAO{
         return entityManager.find(Course.class,id);
     }
 
-    @Override
-    @Transactional
-    public void save(Course course) {
-        entityManager.persist(course);
-    }
 
     @Override
     @Transactional
-    public void save(Student student) {
-        entityManager.persist(student);
+    public void save(Instructor instructor) {
+        entityManager.persist(instructor); // future updates to the entity will be tracked.
     }
+    @Override
+    @Transactional
+    public void save(Course course) {
+        entityManager.persist(course); // future updates to the entity will be tracked.
+    }
+    @Override
+    @Transactional
+    public void save(Student student) {
+        entityManager.persist(student); // future updates to the entity will be tracked.
+    }
+
 
     @Override
     public Student findStudentAndCoursesByStudentId(int id) {
