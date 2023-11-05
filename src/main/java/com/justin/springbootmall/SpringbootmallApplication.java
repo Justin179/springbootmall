@@ -1,5 +1,8 @@
 package com.justin.springbootmall;
 
+import com.justin.springbootmall.aop.dao.AccountDAO;
+import com.justin.springbootmall.aop.dao.MembershipDAO;
+import com.justin.springbootmall.aop.service.TrafficFortuneService;
 import com.justin.springbootmall.jpa.relationship.entity.Course;
 import com.justin.springbootmall.jpa.relationship.entity.Instructor;
 import com.justin.springbootmall.jpa.relationship.entity.InstructorDetail;
@@ -25,7 +28,8 @@ public class SpringbootmallApplication {
 
 
     @Bean
-    CommandLineRunner commandLineRunner(AppDAO appDAO){
+    CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO,
+                                        TrafficFortuneService trafficFortuneService){
         return runner -> { // will be executed right after the service started
 
 //            createStudent(studentDAO);
@@ -41,8 +45,6 @@ public class SpringbootmallApplication {
 //            queryForStudentsByName(studentDAO, "Omer Moore");
 
 //            updateStudent(studentDAO);
-
-//            deleteStudent(studentDAO);
 
 //            deleteAllStudent(studentDAO);
 
@@ -85,8 +87,28 @@ public class SpringbootmallApplication {
 
 //            retrieveStudentAndCourses(appDAO);
 
-            addMoreCoursesForStudent(appDAO);
+//            addMoreCoursesForStudent(appDAO);
+
+
+//            deleteCourseById(appDAO);
+
+//            deleteStudentById(appDAO);
+
+//            demoTheBeforeAdvice(accountDAO, membershipDAO);
+
+            demoTheAroundAdvice(trafficFortuneService);
         };
+    }
+
+    private void demoTheAroundAdvice(TrafficFortuneService trafficFortuneService) {
+        System.out.println("\nMain Program: demoTheAroundAdvice");
+        String fortune = trafficFortuneService.getFortune();
+        System.out.println(fortune);
+    }
+
+    private void demoTheBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
+        accountDAO.addAccount();
+        membershipDAO.addAccount();
     }
 
     private void addMoreCoursesForStudent(AppDAO appDAO) {
@@ -135,11 +157,7 @@ public class SpringbootmallApplication {
         appDAO.save(course);
     }
 
-    private void deleteCourseAndReviews(AppDAO appDAO) {
-        int courseId = 12;
 
-        appDAO.deleteCourseById(courseId);
-    }
 
     private void retrieveCourseAndReviews(AppDAO appDAO) {
         int id = 12;
@@ -157,7 +175,7 @@ public class SpringbootmallApplication {
     }
 
     private void deleteCourseById(AppDAO appDAO) {
-        int id = 10;
+        int id = 5;
         appDAO.deleteCourseById(id);
     }
 
@@ -251,9 +269,9 @@ public class SpringbootmallApplication {
         System.out.println("numRowsDeleted: " + numRowsDeleted);
     }
 
-    private void deleteStudent(StudentDAO studentDAO) {
-        int studentId = 7;
-        studentDAO.delete(studentId);
+    private void deleteStudentById(AppDAO appDAO) {
+        int studentId = 3;
+        appDAO.deleteStudentById(studentId);
         System.out.println("deleted student id: "+studentId);
     }
 
