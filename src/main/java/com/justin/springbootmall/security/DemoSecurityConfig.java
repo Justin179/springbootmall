@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
-@Configuration
+//@Configuration
 public class DemoSecurityConfig {
 
     // tell spring security to use JDBC authentication with datasource
