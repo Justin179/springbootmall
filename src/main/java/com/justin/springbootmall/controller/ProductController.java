@@ -75,6 +75,9 @@ public class ProductController {
         }
     }
 
+
+
+
     @PostMapping("/products")
     public ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest){
         Integer productId = productService.createProduct(productRequest);
