@@ -65,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
             }
 
-            // 扣除商品庫存
+            // 扣除商品的庫存
             productDao.updateStock(product.getProductId(), product.getStock() - buyItem.getQuantity());
 
 
@@ -77,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
             OrderItem orderItem = new OrderItem();
             orderItem.setProductId(buyItem.getProductId());
             orderItem.setQuantity(buyItem.getQuantity());
-            orderItem.setAmount(amount);
+            orderItem.setAmount(amount); // 數量*單價
 
             orderItemList.add(orderItem);
 

@@ -26,6 +26,19 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    // 創建訂單
+    @PostMapping("/users/{userId}/orders")
+    public ResponseEntity<?> createOrder(@PathVariable Integer userId,
+                                         @RequestBody @Valid CreateOrderRequest createOrderRequest){
+
+        Integer orderId = orderService.createOrder(userId,createOrderRequest);
+
+        Order order = orderService.getOrderById(orderId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(order);
+    }
+
+    // 查詢訂單
     @GetMapping("/users/{userId}/orders")
     public ResponseEntity<Page<Order>> getOrders(
             @PathVariable Integer userId,
@@ -37,6 +50,10 @@ public class OrderController {
         orderQueryParams.setLimit(limit);
         orderQueryParams.setOffset(offset);
 
+        /*
+        一個使用者，會有0到多筆訂單記錄
+        一筆訂單記錄，會包含1到多筆訂單明細
+         */
         // 取得 order list
         List<Order> orderList = orderService.getOrders(orderQueryParams);
 
@@ -53,14 +70,5 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
-    @PostMapping("/users/{userId}/orders")
-    public ResponseEntity<?> createOrder(@PathVariable Integer userId,
-                                         @RequestBody @Valid CreateOrderRequest createOrderRequest){
 
-        Integer orderId = orderService.createOrder(userId,createOrderRequest);
-
-        Order order = orderService.getOrderById(orderId);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(order);
-    }
 }

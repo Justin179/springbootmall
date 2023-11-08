@@ -76,7 +76,7 @@ public class OrderDaoImpl implements OrderDao {
             parameterSources[i].addValue("orderId", orderId);
             parameterSources[i].addValue("productId", orderItem.getProductId());
             parameterSources[i].addValue("quantity", orderItem.getQuantity());
-            parameterSources[i].addValue("amount", orderItem.getAmount());
+            parameterSources[i].addValue("amount", orderItem.getAmount()); // 單價*數量
 
         }
 
