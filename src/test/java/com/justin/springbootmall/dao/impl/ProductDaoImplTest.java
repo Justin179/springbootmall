@@ -16,7 +16,7 @@ class ProductDaoImplTest {
     private ProductDao productDao;
 
     @Test
-    void should_GetProductById_When_() {
+    void getProductById() {
         Product product = productDao.getProductById(9);
         assertEquals("BMW", product.getProductName());
     }
