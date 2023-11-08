@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
@@ -34,9 +35,10 @@ public class UserControllerTest {
 
     // 註冊新帳號
     @Test
+    @Transactional
     public void register_success() throws Exception {
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
-        userRegisterRequest.setEmail("test1@gmail.com");
+        userRegisterRequest.setEmail("test9@gmail.com");
         userRegisterRequest.setPassword("123");
 
         String json = objectMapper.writeValueAsString(userRegisterRequest);
@@ -49,7 +51,7 @@ public class UserControllerTest {
         mockMvc.perform(requestBuilder)
                 .andExpect(status().is(201))
                 .andExpect(jsonPath("$.userId", notNullValue()))
-                .andExpect(jsonPath("$.email", equalTo("test1@gmail.com")))
+                .andExpect(jsonPath("$.email", equalTo("test9@gmail.com")))
                 .andExpect(jsonPath("$.createdDate", notNullValue()))
                 .andExpect(jsonPath("$.lastModifiedDate", notNullValue()));
 
@@ -76,10 +78,11 @@ public class UserControllerTest {
     }
 
     @Test
+    @Transactional
     public void register_emailAlreadyExist() throws Exception {
         // 先註冊一個帳號
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
-        userRegisterRequest.setEmail("test2@gmail.com");
+        userRegisterRequest.setEmail("test9@gmail.com");
         userRegisterRequest.setPassword("123");
 
         String json = objectMapper.writeValueAsString(userRegisterRequest);
@@ -94,15 +97,16 @@ public class UserControllerTest {
 
         // 再次使用同個 email 註冊
         mockMvc.perform(requestBuilder)
-                .andExpect(status().is(400));
+                .andExpect(status().is(503)); // MyExceptionHandler @ExceptionHandler(RuntimeException.class) 改為503的
     }
 
     // 登入
     @Test
+    @Transactional
     public void login_success() throws Exception {
         // 先註冊新帳號
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
-        userRegisterRequest.setEmail("test3@gmail.com");
+        userRegisterRequest.setEmail("test9@gmail.com");
         userRegisterRequest.setPassword("123");
 
         register(userRegisterRequest);
@@ -128,10 +132,11 @@ public class UserControllerTest {
     }
 
     @Test
+    @Transactional
     public void login_wrongPassword() throws Exception {
         // 先註冊新帳號
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
-        userRegisterRequest.setEmail("test4@gmail.com");
+        userRegisterRequest.setEmail("test9@gmail.com");
         userRegisterRequest.setPassword("123");
 
         register(userRegisterRequest);
@@ -149,7 +154,7 @@ public class UserControllerTest {
                 .content(json);
 
         mockMvc.perform(requestBuilder)
-                .andExpect(status().is(400));
+                .andExpect(status().is(503)); // MyExceptionHandler @ExceptionHandler(RuntimeException.class) 改為503的
     }
 
     @Test
@@ -183,7 +188,7 @@ public class UserControllerTest {
                 .content(json);
 
         mockMvc.perform(requestBuilder)
-                .andExpect(status().is(400));
+                .andExpect(status().is(503)); // MyExceptionHandler @ExceptionHandler(RuntimeException.class) 改為503的
     }
 
     private void register(UserRegisterRequest userRegisterRequest) throws Exception {
