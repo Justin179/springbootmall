@@ -5,6 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/*
+    all exceptions can be handled in one place
+ */
 @ControllerAdvice
 public class MyExceptionHandler {
 

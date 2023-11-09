@@ -12,12 +12,13 @@ import org.quartz.impl.StdSchedulerFactory;
 public class JobDriver {
     // execute the job every 5 secs
     public static void main(String[] args) throws SchedulerException {
-        // Job
+        // new a Job (task)
         JobDetail job = JobBuilder.newJob(FirstJob.class).withIdentity("job1", "group1").build();
 
-        // Trigger
+        // new a Trigger (when to do the task)
         CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1")
                 .startNow().withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * ? * * *")).build();
+        // https://www.freeformatter.com/cron-expression-generator-quartz.html
 
         // Scheduler
         StdSchedulerFactory schedulerFactory = new StdSchedulerFactory();

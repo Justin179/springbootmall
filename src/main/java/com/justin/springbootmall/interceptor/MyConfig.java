@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+// 2 register MyInterceptor
 @Configuration
 public class MyConfig implements WebMvcConfigurer {
 
@@ -13,6 +13,6 @@ public class MyConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(myInterceptor).addPathPatterns("/**"); // 剛剛的截攔器，套用到所有的url上
+        registry.addInterceptor(myInterceptor).addPathPatterns("/**"); // MyInterceptor，套用到所有的url上
     }
 }

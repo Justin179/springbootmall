@@ -1,6 +1,5 @@
 package com.justin.springbootmall.dao.impl;
 
-import com.justin.springbootmall.constant.ProductCategory;
 import com.justin.springbootmall.dao.ProductDao;
 import com.justin.springbootmall.dto.ProductQueryParams;
 import com.justin.springbootmall.dto.ProductRequest;

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ObjectMapperController {
 
-    @GetMapping("/convert")
+    @GetMapping("/testJsonObjectMapper")
     public String convert() throws JsonProcessingException {
 
         // Student to json string
@@ -20,11 +20,11 @@ public class ObjectMapperController {
         System.out.println("json: "+json);
 
         // json string to Student
-        String jsonStr = "{\"id\":3,\"name\":\"Amy\"}";
-        Student studentObj = mapper.readValue(jsonStr, Student.class);
+//        String jsonStr = "{\"id\":3,\"name\":\"Amy\"}";
+        Student studentObj = mapper.readValue(json, Student.class);
         System.out.println("Student id & name: "+studentObj.getId()+" & "+studentObj.getName());
 
-        return "convert success";
+        return "JsonObjectMapper test success";
     }
 
 }
