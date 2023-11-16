@@ -2,6 +2,7 @@ package com.justin.springbootmall.aop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,6 +18,14 @@ class HpPrinterTest {
      */
     @Autowired
     Printer printer;
+
+    @Value("${info.app.text}")
+    String text;
+
+    @Test
+    void getTextFromProperties() {
+        System.out.println(text);
+    }
 
     @Test
     void print() {
